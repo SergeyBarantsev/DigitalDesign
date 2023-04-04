@@ -13,7 +13,7 @@ public class Main {
             List<Map<String, Object>> result2 = starter.execute("INSERT VALUES 'lastName' = 'Малявка Юлиана', 'id'=2, 'cost' = 25.1, 'age'=25, 'active'=  true");
             System.out.println("2" + result2);
             List<Map<String, Object>> result3 = starter.execute("INSERT VALUES 'lastName' = 'Петрова' , 'id'=3, 'age'=40, 'active'=true, 'cost'=3.2");
-            List<Map<String, Object>> result10 = starter.execute("INSERT VALUES 'lastName' = 'Fynbgjdf' , 'id'=4, 'age'=17, 'active'=false, 'cost'=80.2");
+            List<Map<String, Object>> result10 = starter.execute("INSERT VALUES 'lastName' = 'Федоров' , 'id'=4, 'age'=17, 'active'=false, 'cost'=80.2");
             System.out.println("3" + result3);
             List<Map<String, Object>> result0 = starter.execute("SELECT");
             System.out.println("0" + result0);
@@ -26,7 +26,7 @@ public class Main {
             System.out.println("5" + result5);
             List<Map<String, Object>> result000 = starter.execute("SELECT");
             System.out.println("0" + result000);
-            List<Map<String, Object>> result6 = starter.execute(" SELECT WHERE  'lastName' ilike 'F!%'");
+            List<Map<String, Object>> result6 = starter.execute(" SELECT WHERE  'lastName' ilike '%Ф%'");
             System.out.println("6" + result6);
 //Получение всех данных из коллекции (т.е. в данном примере вернется 1 запись)
             List<Map<String, Object>> result7 = starter.execute("SELECT");
