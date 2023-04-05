@@ -260,7 +260,7 @@ class Methods {
                 try {
                     str = condition.split("i?[Ll][Ii][Kk][Ee]|!?=|[<>]=?")[1].trim();
                 } catch (Exception ex) {
-                    throw new Exception("В lastName отсутствует условие");
+                    throw new Exception("В lastName отсутствует условие или оператор");
                 }
                 Pattern pattern = Pattern.compile("(%?[A-aZ-zА-аЯ-я\\s]+%?)");
                 Matcher matcher = pattern.matcher(str);
@@ -276,11 +276,16 @@ class Methods {
                         if (condition.replaceAll(" ", "").matches("'\\w+'([Ii]?[Ll][Ii][Kk][Ee]|[><]=?)'?(null)'?"))
                             throw new Exception("Данный оператор не поддерживается для null");
                     } else {
-                        if (condition.replaceAll(" ", "").matches("'\\w+'='(%?[A-aZ-zА-аЯ-я\\s]+%?)'")) {
+                        if (condition.replaceAll(" ", "").matches("'\\w+'='([A-aZ-zА-аЯ-я\\s]+)'")) {
                             checkSet.add(Objects.equals(listLastName, condLastname));
                         }
-                        if (condition.replaceAll(" ", "").matches("'\\w+'!='(%?[A-aZ-zА-аЯ-я\\s]+%?)'")) {
+                        if (condition.replaceAll(" ", "").matches("'\\w+'!='([A-aZ-zА-аЯ-я\\s]+)'")) {
                             checkSet.add(!(Objects.equals(listLastName, condLastname)));
+                        }
+                        if ((condition.replaceAll(" ", "").matches("'\\w+'!?='(%[A-aZ-zА-аЯ-я\\s]+)'") |
+                                (condition.replaceAll(" ", "").matches("'\\w+'!?='([A-aZ-zА-аЯ-я\\s]+%)'")) |
+                                (condition.replaceAll(" ", "").matches("'\\w+'!?='(%[A-aZ-zА-аЯ-я\\s]+%)'")))) {
+                            throw new Exception("При использовании % применяйте операторы LIKE или ILIKE");
                         }
                         if (condition.replaceAll(" ", "").matches("'\\w+'([Ll][Ii][Kk][Ee])'(%?[A-aZ-zА-аЯ-я\\s]+%?)'")) {
                             if (condLastname.startsWith("%") && condLastname.endsWith("%")) {
